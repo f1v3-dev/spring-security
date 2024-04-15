@@ -20,7 +20,7 @@ public class RegisterMemberService {
     }
 
     private void validateDuplicateMember(String userId) {
-        memberRepository.findByUserId(userId)
+        memberRepository.findByUserid(userId)
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 회원입니다.");
                 });

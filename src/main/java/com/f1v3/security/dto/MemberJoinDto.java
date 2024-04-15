@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class MemberJoinDto {
 
-    private String userId;
+    private String userid;
 
     private String password;
     

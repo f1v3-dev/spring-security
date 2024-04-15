@@ -14,7 +14,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     public Optional<Member> findMember(String userId) {
-        return memberRepository.findByUserId(userId);
+        return memberRepository.findByUserid(userId);
     }
 
     public boolean isValidMember(String userId, String password) {

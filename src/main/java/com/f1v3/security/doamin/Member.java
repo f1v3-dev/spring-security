@@ -18,7 +18,7 @@ public class Member {
 
     @Column(unique = true)
     @NonNull
-    private String userId;
+    private String userid;
 
     @NonNull
     private String password;
@@ -27,8 +27,8 @@ public class Member {
     private String roles;
 
 
-    public Member(@NonNull String userId, @NonNull String password) {
-        this.userId = userId;
+    public Member(@NonNull String userid, @NonNull String password) {
+        this.userid = userid;
         this.password = password;
         this.roles = "USER";
     }
