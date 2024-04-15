@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -19,12 +20,14 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .headers(headers -> headers
+                        .frameOptions(frameOptions -> frameOptions.disable())) // h2-console 접근을 위한 설정
                 .csrf(AbstractHttpConfigurer::disable) // csrf 비활성화 ->
                 .cors(AbstractHttpConfigurer::disable) // cors 비활성화
                 .authorizeHttpRequests(request -> request
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll() // forward 요청은 모든 사용자에게 허용 ?
-                        .requestMatchers("/images/**", "/view/join", "/auth/login").permitAll() // 정적 리소스, 회원가입, 로그인은 모든 사용자에게 허용
-                        .anyRequest().authenticated() // 모든 요청에 대해 인증을 요구
+                        .requestMatchers("/images/**", "/view/join", "/auth/login", "/h2-console/**").permitAll() // 정적 리소스, 회원가입, 로그인은 모든 사용자에게 허용
+                        .anyRequest().permitAll() // 모든 요청에 대해 인증을 요구
                 )
                 .formLogin(login -> login  // form 로그인 설정
                         .loginPage("/view/login") // thymeleaf view 경로
@@ -41,6 +44,6 @@ public class SpringSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new SimplePasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
 }
