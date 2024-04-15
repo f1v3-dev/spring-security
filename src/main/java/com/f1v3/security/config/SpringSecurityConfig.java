@@ -25,6 +25,10 @@ public class SpringSecurityConfig {
                         .anyRequest().authenticated() // 모든 요청에 대해 인증을 오규
                 )
                 .formLogin(login -> login  // form 로그인 설정
+                        .loginPage("/view/login")
+                        .loginProcessingUrl("/login-process")
+                        .usernameParameter("userId")
+                        .passwordParameter("password")
                         .defaultSuccessUrl("/view/dashboard", true)
                         .permitAll()
                 )
