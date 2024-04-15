@@ -22,7 +22,7 @@ public class SpringSecurityConfig {
                 .cors(AbstractHttpConfigurer::disable) // cors 비활성화
                 .authorizeHttpRequests(request -> request
                         .dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll() // forward 요청은 모든 사용자에게 허용 ?
-                        .requestMatchers("/images/**", "/view/join", "/auth/login").permitAll()
+                        .requestMatchers("/images/**", "/view/join", "/auth/login").permitAll() // 정적 리소스, 회원가입, 로그인은 모든 사용자에게 허용
                         .anyRequest().authenticated() // 모든 요청에 대해 인증을 요구
                 )
                 .formLogin(login -> login  // form 로그인 설정
