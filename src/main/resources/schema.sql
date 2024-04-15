@@ -2,8 +2,8 @@ DROP TABLE IF EXISTS member CASCADE;
 
 CREATE TABLE member
 (
-    id       BIGINT PRIMARY KEY,
+    id       BIGINT PRIMARY KEY AUTO_INCREMENT,
     userId   VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    roles    VARCHAR(255) NOT NULL,
-)
+    roles    VARCHAR(255) NOT NULL
+);
