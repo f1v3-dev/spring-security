@@ -17,8 +17,8 @@ public class AuthorizationController {
     @PostMapping("/join")
     public ResponseEntity<String> join(@RequestBody MemberJoinDto dto) {
 
-        Long memberId = memberService.join(dto.getUserid(), dto.getPassword());
-        return ResponseEntity.ok("join success [memberid = " + memberId + "]");
+        Long memberId = memberService.join(dto.getUserId(), dto.getPassword());
+        return ResponseEntity.ok("join success [memberId = " + memberId + "]");
     }
 
     @ExceptionHandler(Exception.class)

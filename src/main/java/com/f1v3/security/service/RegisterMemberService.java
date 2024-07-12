@@ -1,6 +1,6 @@
 package com.f1v3.security.service;
 
-import com.f1v3.security.doamin.Member;
+import com.f1v3.security.doamin.MemberEntity;
 import com.f1v3.security.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,12 +20,12 @@ public class RegisterMemberService {
         validateDuplicateMember(userId);
 
         // PasswordEncoder -> BCrypt 방식으로 암호화하여 저장
-        Member member = new Member(userId, passwordEncoder.encode(password));
+        MemberEntity member = new MemberEntity(userId, passwordEncoder.encode(password));
         return memberRepository.save(member).getId();
     }
 
     private void validateDuplicateMember(String userId) {
-        memberRepository.findByUserid(userId)
+        memberRepository.findByUserId(userId)
                 .ifPresent(m -> {
                     throw new IllegalStateException("이미 존재하는 회원입니다.");
                 });

@@ -1,6 +1,6 @@
 package com.f1v3.security.service;
 
-import com.f1v3.security.doamin.Member;
+import com.f1v3.security.doamin.MemberEntity;
 import com.f1v3.security.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,11 +13,10 @@ import java.util.Optional;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-
     private final PasswordEncoder passwordEncoder;
 
-    public Optional<Member> findMember(String userId) {
-        return memberRepository.findByUserid(userId);
+    public Optional<MemberEntity> findMember(String userId) {
+        return memberRepository.findByUserId(userId);
     }
 
     public boolean isValidMember(String userId, String password) {

@@ -10,25 +10,24 @@ import org.springframework.lang.NonNull;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class MemberEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    @NonNull
-    private String userid;
+    @Column(unique = true, nullable = false)
+    private String userId;
 
-    @NonNull
+    @Column(nullable = false)
     private String password;
 
-    @NonNull
+    @Column(nullable = false)
     private String roles;
 
 
-    public Member(@NonNull String userid, @NonNull String password) {
-        this.userid = userid;
+    public MemberEntity(@NonNull String userId, @NonNull String password) {
+        this.userId = userId;
         this.password = password;
         this.roles = "USER";
     }

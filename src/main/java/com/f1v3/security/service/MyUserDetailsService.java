@@ -1,6 +1,6 @@
 package com.f1v3.security.service;
 
-import com.f1v3.security.doamin.Member;
+import com.f1v3.security.doamin.MemberEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,12 +17,12 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Member member = memberService.findMember(username)
+        MemberEntity member = memberService.findMember(username)
                 .orElseThrow(() -> new UsernameNotFoundException("사용자가 없어요.. ㅠㅠ"));
 
 
         return User.builder()
-                .username(member.getUserid())
+                .username(member.getUserId())
                 .password(member.getPassword())
                 .roles(member.getRoles())
                 .build();
